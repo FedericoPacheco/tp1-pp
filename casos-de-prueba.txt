@@ -1,0 +1,86 @@
+"INICIALIZAR GESTOR"
+GestorPublicaciones reiniciarInstanciacion.
+G := GestorPublicaciones agregarGestorPublicaciones.
+A := GestorPublicaciones agregarGestorPublicaciones. "retorna la misma instancia que G"
+"-----------------------------------------------------------------------------"
+"AGREGAR COMERCIO"
+G agregarComercio: 'La Estrella'      cuit: 12345678908 tipo: 'Panaderia'.
+G agregarComercio: 'Perez'            cuit: 12344545454 tipo: 'Panaderia'. 
+G agregarComercio: 'Friar'            cuit: 12344542143 tipo: 'Carniceria'. 
+G agregarComercio: 'Los dos hermanos' cuit: 12344326561 tipo: 'Verduleria'. 
+G agregarComercio: 'Vitamsol'         cuit: 12344321431 tipo: 'Dietetica'. 
+
+G agregarComercio: 'Zona Zero'        cuit: 65436354654 tipo: 'Videojuegos'.
+G agregarComercio: 'Vitamsol 2'       cuit: 12344321431 tipo: 'Dietetica'.
+G agregarComercio: 'Friar'				 cuit: 45235324534 tipo: 'Carniceria'.
+"-----------------------------------------------------------------------------"
+"AGREGAR CLIENTE PERSONA"
+G agregarClientePersona: 'Federico' apellido: 'Pacheco' dni: 42870781.
+G agregarClientePersona: 'Facundo' apellido: 'Marcolini' dni: 43294501. 
+
+G agregarClientePersona: 'Juan' apellido: 'Perez' dni: 42870781.
+G agregarClientePersona: 'Federico' apellido: 'Pacheco' dni: 45000000.
+"-----------------------------------------------------------------------------"
+"AGREGAR CLIENTE EMPRESA"
+G agregarClienteEmpresa: 'FolderIT' cuit: 65437354874.
+G agregarClienteEmpresa: 'Pericles' cuit: 53428953425.
+
+G agregarClienteEmpresa: 'Choperia Santa Fe' cuit: 53428953425.
+G agregarClienteEmpresa: 'Pericles' cuit: 89431284321. 
+"-----------------------------------------------------------------------------"
+"AGREGAR PRODUCTO #(codigo, nombre, descripcion, stockdisponible y precio de venta)"
+G agregarProducto: #(1 'Factura' '-' 200 25) enComercio: 12345678908.
+G agregarProducto: #(2 'Alfajor maicena' 'Grande' 100 25) enComercio: 12345678908.
+G agregarProducto: #(1 'Factura 2' '-' 125 30) enComercio: 12345678908.
+
+G agregarProducto: #(1 'Factura' '-' 200 30) enComercio: 12344545454.
+G agregarProducto: #(2 'Alfajor maicena' 'Grande' 100 30) enComercio: 12344545454.
+G agregarProducto: #(3 'Factura especial' '-' 125 40) enComercio: 12344545454.
+
+G agregarProducto: #(1 'Ternera' 'Precio por kg' 550 1000) enComercio: 12344542143.
+G agregarProducto: #(2 'Cerdo' 'Precio por kg' 0 750) enComercio: 12344542143.
+"-----------------------------------------------------------------------------"
+"AGREGAR PEDIDO"
+G insertarPedido: 43294501 comercio: 12344542143 productos: #(#(1 2)).
+G insertarPedido: 65437354874 comercio: 12344545454 productos: #(#(1 50) #(2 20) #(3 25)). 
+G insertarPedido: 42870781 comercio: 12344545454 productos: #(#(1 5) #(2 5) #(3 5)). 
+
+G insertarPedido: 100 comercio: 12344542143 productos: #(#(1 2)).
+G insertarPedido: 100 comercio: 100 productos: #(#(1 2)).
+G insertarPedido: 65437354874 comercio: 12344545454 productos: #(#(1 999) #(2 999) #(3 999)). 
+"-----------------------------------------------------------------------------"
+"PRODUCTOS EN COMERCIO LLAMADOS"
+L := G productosEnCarniceriaLlamados: 'Cerdo'.
+L := G productosEnPanaderiaLlamados: '  a L f A j O r'.
+L := G productosEnPanaderiaLlamados: 'Factura'.
+L := G productosEnPanaderiaLlamados: 'ALFAJORES'.
+"-----------------------------------------------------------------------------"
+"ACTUALIZAR STOCK"
+G actualizarStock: 1 nuevoValor: -999 enComercio: 12344542143.
+G actualizarStock: 99 nuevoValor: 100 enComercio: 12344542143.
+G actualizarStock: 1 nuevoValor: 100 enComercio: 100.
+G actualizarStock: 2 nuevoValor: 500 enComercio: 12344542143.
+"-----------------------------------------------------------------------------"
+"DESCARGAR PEDIDOS"
+G descargarPedidos: Date today asDate enComercio: 100.
+G descargarPedidos: '2020-9-19' asDate enComercio: 12344542143.
+L := G descargarPedidos: Date today enComercio: 12344545454.
+"-----------------------------------------------------------------------------"
+"MARCAR COMO ENVIADO"
+G marcarPedidoEnviado: 1 enComercio: 12344542143. 
+G marcarPedidoEnviado: 999999 enComercio: 12344542143. 
+G marcarPedidoEnviado: 1 enComercio: 100.
+
+G marcarPedidoEnviado: 2 enComercio: 12344545454.
+G marcarPedidoEnviado: 3 enComercio: 12344545454.
+"-----------------------------------------------------------------------------"
+"IMPORTE TOTAL VENTAS"
+G importeTotalVentasDia: Date today enComercio: 12344545454.
+G importeTotalVentasDia: '2020-9-19' asDate enComercio: 12344545454.
+G importeTotalVentasDia: Date today enComercio: 100.
+"-----------------------------------------------------------------------------"
+"PEDIDOS ENTREGADOS EN UNA FECHA"
+G pedidosEntregadosDesde: Date today enComercio: 12344545454. 
+G pedidosEntregadosDesde: Date today enComercio: 100. 
+G pedidosEntregadosDesde: '1970-1-1' asDate enComercio: 12344545454. 
+
